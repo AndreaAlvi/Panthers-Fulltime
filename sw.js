@@ -1,4 +1,4 @@
-const CACHE='panthers-fulltime-v2';
+const CACHE='panthers-fulltime-v3';
 const CORE=['./','index.html','styles.css','app.js','manifest.webmanifest','assets/fonts/FUDGrotesk-SemiBold.ttf','assets/fonts/Florilane Cardillac.ttf'];
 const OVERLAYS=Array.from({length:12},(_,i)=>`assets/overlays/${i+1}.png`);
 const GRADIENTS=['assets/SfumaturaSopra.png','assets/SfumaturaSotto.png'];
