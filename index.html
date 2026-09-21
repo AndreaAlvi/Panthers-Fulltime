@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#AF1828">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Panthers FT">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Panthers Fulltime</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PANTHERS 1977</div>
+        <h1>FULLTIME</h1>
+      </div>
+      <button id="infoBtn" class="icon-btn" aria-label="Info">?</button>
+    </header>
+
+    <section class="match-card">
+      <div class="match-date" id="matchDate">—</div>
+      <div class="match-teams">
+        <div class="team team-home">
+          <img id="homeLogo" alt="">
+          <span id="homeName">—</span>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team team-away">
+          <img id="awayLogo" alt="">
+          <span id="awayName">—</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="canvas-wrap">
+        <canvas id="preview" width="1080" height="1350" aria-label="Anteprima Fulltime 4:5"></canvas>
+        <div id="emptyState" class="empty-state">
+          <strong>CARICA LA FOTO</strong>
+          <span>La foto del fotografo entra qui</span>
+        </div>
+      </div>
+
+      <div class="selected-bar">
+        <span>SELEZIONATO</span>
+        <strong id="selectedLabel">FOTO</strong>
+      </div>
+
+      <div class="layer-selectors" role="tablist" aria-label="Elemento da modificare">
+        <button class="layer-btn active" data-layer="photo">📷 FOTO</button>
+        <button class="layer-btn" data-layer="title">A FULLTIME</button>
+        <button class="layer-btn" data-layer="score">𝟑 — 𝟏 RISULTATO</button>
+      </div>
+
+      <div class="controls-panel">
+        <div class="score-row">
+          <label for="scoreInput">RISULTATO</label>
+          <input id="scoreInput" type="text" inputmode="text" maxlength="7" value="0 — 0" aria-label="Risultato">
+        </div>
+        <div class="controls-row">
+          <button class="control-btn" data-action="left" aria-label="Sposta a sinistra">←</button>
+          <button class="control-btn" data-action="up" aria-label="Sposta in alto">↑</button>
+          <button class="control-btn" data-action="down" aria-label="Sposta in basso">↓</button>
+          <button class="control-btn" data-action="right" aria-label="Sposta a destra">→</button>
+          <div class="control-divider"></div>
+          <button class="control-btn" data-action="minus" aria-label="Riduci">−</button>
+          <button class="control-btn" data-action="plus" aria-label="Ingrandisci">+</button>
+        </div>
+        <div class="center-row">
+          <button id="centerBtn" class="center-btn" aria-label="Centra elemento selezionato">◎ &nbsp; CENTRA ELEMENTO</button>
+        </div>
+        <div class="title-variants" id="titleVariants">
+          <span>FULLTIME</span>
+          <button class="variant-btn active" data-title-variant="solid">PIENO</button>
+          <button class="variant-btn" data-title-variant="outline">FULL + TIME OUTLINE</button>
+        </div>
+        <div class="hint" id="controlHint">FOTO · frecce = posizione · +/− = zoom</div>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">LEGGIBILITÀ</div>
+          <h2>Sfumature</h2>
+        </div>
+        <span class="locked">OPZIONALI</span>
+      </div>
+      <div class="gradient-grid">
+        <button class="gradient-btn" id="gradientTopBtn" data-gradient="top">
+          <img src="assets/SfumaturaSopra.png" alt="Sfumatura dall'alto">
+          <span>SFUMATURA SOPRA</span>
+        </button>
+        <button class="gradient-btn" id="gradientBottomBtn" data-gradient="bottom">
+          <img src="assets/SfumaturaSotto.png" alt="Sfumatura dal basso">
+          <span>SFUMATURA SOTTO</span>
+        </button>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">OVERLAY</div>
+          <h2>Elementi rossi</h2>
+        </div>
+        <span class="count">12</span>
+      </div>
+      <div class="overlay-grid" id="overlayGrid"></div>
+
+      <div class="section-head logos-head">
+        <div>
+          <div class="section-kicker">PARTITA</div>
+          <h2>Loghi automatici</h2>
+        </div>
+        <span class="locked">FISSI</span>
+      </div>
+      <p class="small-note">I loghi vengono scelti dal calendario e rimangono sempre nella posizione Panthers.</p>
+
+      <div class="bottom-actions">
+        <button id="resetBtn" class="secondary-btn">RESET</button>
+        <button id="exportBtn" class="primary-btn">ESPORTA 4:5</button>
+      </div>
+      <input id="photoInput" type="file" accept="image/*" hidden>
+    </section>
+  </main>
+
+  <dialog id="infoDialog">
+    <div class="dialog-content">
+      <button id="closeInfo" class="dialog-close" aria-label="Chiudi">×</button>
+      <div class="eyebrow">PANTHERS FT</div>
+      <h2>Come funziona</h2>
+      <ol>
+        <li>Carica la foto dal pulsante FOTO.</li>
+        <li>Scegli un overlay rosso.</li>
+        <li>Seleziona FOTO, FULLTIME o RISULTATO.</li>
+        <li>Usa ← ↑ ↓ → e −/+ per sistemare l'elemento selezionato.</li>
+        <li>Inserisci il risultato e esporta il PNG 1080×1350.</li>
+      </ol>
+      <p>La foto è il layer di fondo. Gli overlay rossi stanno sopra la foto. Testi e loghi stanno sempre sopra tutto.</p>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
