@@ -357,6 +357,13 @@ document.getElementById('exportBtn').addEventListener('click',()=>{
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fileName;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);render(true);
  },'image/png');
 });
-const dialog=document.getElementById('infoDialog');document.getElementById('infoBtn').addEventListener('click',()=>dialog.showModal());document.getElementById('closeInfo').addEventListener('click',()=>dialog.close());
+const dialog=document.getElementById('infoDialog');
+if(dialog){
+  const infoBtn=document.getElementById('infoBtn');
+  const closeInfo=document.getElementById('closeInfo');
+
+  if(infoBtn) infoBtn.addEventListener('click',()=>dialog.showModal());
+  if(closeInfo) closeInfo.addEventListener('click',()=>dialog.close());
+}
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
 (async()=>{setMatch();populateOverlays();await loadImages();render()})();
